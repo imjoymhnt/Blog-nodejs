@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 
 const homeStartingContent =
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi est quia nostrum, quae ipsam error quibusdam veniam rem, fuga eligendi, dolor eveniet? Praesentium, rem, debitis recusandae consectetur ipsa illo pariatur ipsam quaerat repellat assumenda dolor laudantium distinctio iste quae excepturi, aut veniam dolorum mollitia eveniet sunt inventore at deleniti! Deserunt?";
+  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi est quia nostrum, quae ipsam error quibusdam veniam rem, fuga eligendi, dolor eveniet? Praesentium, rem, debitis recusandae consectetur ipsa illo pariatur ipsam quaerat repellat assumenda dolor laudantium distinctio iste quae excepturi, aut veniam dolorum mollitia eveniet sunt inventore at deleniti! Deserunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi est quia nostrum, quae ipsam error quibusdam veniam rem, fuga eligendi, dolor eveniet? Praesentium, rem, debitis recusandae consectetur ipsa illo pariatur ipsam quaerat repellat assumenda dolor laudantium distinctio iste quae excepturi, aut veniam dolorum mollitia eveniet sunt inventore at deleniti! Deserunt?";
 const aboutContent =
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi est quia nostrum, quae ipsam error quibusdam veniam rem, fuga eligendi, dolor eveniet? Praesentium, rem, debitis recusandae consectetur ipsa illo pariatur ipsam quaerat repellat assumenda dolor laudantium distinctio iste quae excepturi, aut veniam dolorum mollitia eveniet sunt inventore at deleniti! Deserunt?";
 const contactContent =
@@ -17,7 +17,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.render("home", { homeStartingContent });
+});
+
+app.get("/about", (req, res) => {
+  res.render("about", { aboutContent });
+});
+app.get("/contact", (req, res) => {
+  res.render("contact", { contactContent });
 });
 
 app.listen(3000, () => {
