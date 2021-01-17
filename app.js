@@ -38,8 +38,6 @@ app.get("/posts/:title", (req, res) => {
   blogs.forEach((blog) => {
     if (_.lowerCase(blog.title) === _.lowerCase(req.params.title)) {
       res.render("post", { blog });
-    } else {
-      console.log("Not a Match!");
     }
   });
 });
@@ -49,7 +47,9 @@ app.post("/compose", (req, res) => {
     title: req.body.heading,
     content: req.body.text,
   };
-  blogs.push(post);
+  if (post.title.length !== 0) {
+    blogs.push(post);
+  }
   res.redirect("/");
 });
 
