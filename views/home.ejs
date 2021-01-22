@@ -7,7 +7,7 @@
 <%blogs.forEach((blog) => {%>
 <h1><%= blog.title %></h1>
 <p>
-  <%= blog.content.substring(0,100) + ' ...' %>
-  <a href="/posts/<%= blog.title %>">Read More..</a>
+  <%= blog.body.substring(0,100) + ' ...' %>
+  <a href="/posts/<%= blog._id %>">Read More..</a>
 </p>
 <%})%> <%- include('partials/footer') -%>

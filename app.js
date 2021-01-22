@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 const ejs = require("ejs");
 const _ = require("lodash");
 
@@ -17,10 +18,31 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-const blogs = [];
+mongoose.connect("mongodb://localhost:27017/blogDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+});
+
+const blogSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  body: {
+    type: String,
+    required: true,
+  },
+});
+
+const Blog = mongoose.model("Blog", blogSchema);
 
 app.get("/", (req, res) => {
-  res.render("home", { homeStartingContent, blogs });
+  Blog.find((err, blogs) => {
+    if (!err) {
+      res.render("home", { homeStartingContent, blogs });
+    }
+  });
 });
 
 app.get("/about", (req, res) => {
@@ -34,22 +56,22 @@ app.get("/compose", (req, res) => {
   res.render("compose");
 });
 
-app.get("/posts/:title", (req, res) => {
-  blogs.forEach((blog) => {
-    if (_.lowerCase(blog.title) === _.lowerCase(req.params.title)) {
+app.get("/posts/:id", (req, res) => {
+  Blog.findOne({ _id: req.params.id }, (err, blog) => {
+    if (!err) {
       res.render("post", { blog });
     }
   });
 });
 
 app.post("/compose", (req, res) => {
-  const post = {
-    title: req.body.heading,
-    content: req.body.text,
-  };
-  if (post.title.length !== 0) {
-    blogs.push(post);
-  }
+  const title = req.body.title;
+  const body = req.body.body;
+  const post = new Blog({
+    title,
+    body,
+  });
+  post.save();
   res.redirect("/");
 });
 

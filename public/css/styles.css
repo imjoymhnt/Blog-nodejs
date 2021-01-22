@@ -1,9 +1,11 @@
 body {
   height: 100%;
   width: 100%;
-  background-image: -webkit-linear-gradient(65deg, #000046 50%, #1cb5e0 50%);
   background-repeat: no-repeat;
-  color: #fff;
+  color: rgb(0, 0, 0);
+  background: url("../images/undraw_pending_approval_xuu9.svg") center;
+  background-repeat: no-repeat;
+  background-color: #98e6fc;
 }
 
 .container-fluid {
@@ -18,8 +20,9 @@ body {
   margin-bottom: 0;
   font-size: 12px;
   letter-spacing: 5px;
-  background-image: -webkit-linear-gradient(65deg, #000046 17%, #1cb5e0 17%);
-  color: #fff;
+  background: #98e6fc;
+  color: #fff !important;
+  border-bottom: 1px dashed;
 }
 .navbar-nav li a:hover {
   color: #1abc9c !important;
@@ -30,16 +33,21 @@ body {
 }
 
 .footer {
-  position: absolute;
+  position: relative;
   text-align: center;
+  padding-top: 3px;
   bottom: 0;
   width: 100%;
   height: 60px;
-  background-color: #fff;
+  background-color: #98e6fc;
 }
 
 .footer p {
   margin-top: 25px;
   font-size: 12px;
   color: rgb(56, 56, 56);
+}
+
+p {
+  font-size: 2rem;
 }
